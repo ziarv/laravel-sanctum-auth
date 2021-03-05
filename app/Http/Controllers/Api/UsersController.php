@@ -7,7 +7,6 @@ use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\UserCollection;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends ApiController
@@ -59,7 +58,7 @@ class UsersController extends ApiController
      */
     public function logoutAction()
     {
-        $user = Auth::user();
+        $user = request()->user();
         /* Revoke All Tokens */
         $user->tokens()->delete();
         return $this->respondSuccess('User Logged Out');
